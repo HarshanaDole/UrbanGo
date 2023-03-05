@@ -7,7 +7,7 @@
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">UrbanGo</span>
+                    <span class="name">Yasas</span>
                     <span class="profession">Admin Panel</span>
                 </div>
             </div>
