@@ -5,7 +5,7 @@
 
 /* CSS */
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/adminstyle.css">
     
 /* Boxicons CSS */
 
@@ -16,7 +16,7 @@
 </head>
 <body>
     
-    <?php include "SideNavBar.php"; ?>
+    <?php include "../components/SideNavBar.php"; ?>
 
     <section class="home">
         <div class="text">Admin Panel</div>
@@ -76,7 +76,7 @@
 
     </section>
 
-    <script src="js/script.js"></script>
+    <script src="../js/adminscript.js"></script>
 
 </body>
 </html>
