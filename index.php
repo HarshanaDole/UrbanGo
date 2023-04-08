@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +33,16 @@
 				</select>
             </div>
             <div class="form-group">
-				<label for="date">Date of Travel</label>
-				<input type="date" id="date" name="date" required>
+				<label for="date">Date</label>
+				<select id="date" name="date">
+					<option value="">Select a date</option>
+                    <option value="today">08/04/2023</option>
+					<option value="tommorow">09/04/2023</option>
+					<option value="dayafter">10/04/2023</option>
+				</select>
+            </div>
+			<div class="form-group">
+			<input type="submit" value="Search" class="btn" name="search">
 			</div>
 		</form>
 	</div>
@@ -38,5 +50,6 @@
 	<?php include "components/bottom-nav-bar.php"; ?>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+	
 </body>
 </html>
