@@ -1,82 +1,127 @@
+<?php
+
+include '../components/dbconfig.php';
+
+session_start();
+
+if (isset($_SESSION['admin_id'])) {
+   $admin_id = $_SESSION['admin_id'];
+} else {
+   header('location:admin_login.php');
+   exit;
+}
+
+?>
+
 <!DOCTYPE html>
-  
 <html lang="en">
+
 <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>dashboard</title>
 
-/* CSS */
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <link rel="stylesheet" href="../css/adminstyle.css">
-    
-/* Boxicons CSS */
-
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    
-/* <title>Admin Panel Dashboard</title> */
+   <link rel="stylesheet" href="../css/adminstyle.css">
 
 </head>
+
 <body>
-    
-    <?php include "../components/SideNavBar.php"; ?>
 
-    <section class="home">
-        <div class="text">Admin Panel</div>
+   <?php include '../components/admin_header.php'; ?>
 
-        <div class="box-container">
+   <section class="dashboard">
 
-            <div class="box">
-                <h3>16</h3>
-                <p>buses added</p>
-                <a href="" class="btn">see buses</a>
-            </div>
+      <h1 class="heading">dashboard</h1>
 
-            <div class="box">
-                <h3>60</h3>
-                <p>trips assigned</p>
-                <a href="" class="btn">see trips</a>
-            </div>
+      <div class="box-container">
 
-            <div class="box">
-                <h3>4</h3>
-                <p>ongoing sessions</p>
-                <a href="" class="btn">see sessions</a>
-            </div>
+         <div class="box">
+            <?php
+            $busesRef = $database->getReference('buses');
+            $busesData = $busesRef->getValue();
+            $numBuses = count($busesData);
+            ?>
+            <h3><?= $numBuses ?></h3>
+            <p>buses added</p>
+            <a href="buses.php" class="btn">see buses</a>
+         </div>
 
-            <div class="box">
-                <h3>12</h3>
-                <p>routes & fares</p>
-                <a href="" class="btn">see routes</a>
-            </div>
+         <div class="box">
+         <?php
+            $tripsRef = $database->getReference('trips');
+            $tripData = $tripsRef->getValue();
+            $numtrips = count($tripData);
+            ?>
+            <h3><?= $numtrips ?></h3>
+            <p>trips assigned</p>
+            <a href="trips.php" class="btn">see trips</a>
+         </div>
 
-            <div class="box">
-                <h3>60</h3>
-                <p>bookings added</p>
-                <a href="" class="btn">see bookings</a>
-            </div>
+         <div class="box">
+         <?php
+            $sessionsRef = $database->getReference('sessions');
+            $sessionData = $sessionsRef->getValue();
+            $numsessions = count($sessionData);
+            ?>
+            <h3><?= $numsessions ?></h3>
+            <p>ongoing sessions</p>
+            <a href="sessions.php" class="btn">see sessions</a>
+         </div>
 
-            <div class="box">
-                <h3>54</h3>
-                <p>feedback recieved</p>
-                <a href="" class="btn">see feedback</a>
-            </div>
+         <div class="box">
+         <?php
+            $routesRef = $database->getReference('routes');
+            $routeData = $routesRef->getValue();
+            $numroutes = count($routeData);
+            ?>
+            <h3><?= $numroutes ?></h3>
+            <p>routes & fares</p>
+            <a href="routes.php" class="btn">see routes</a>
+         </div>
 
-            <div class="box">
-                <h3>69</h3>
-                <p>users registered</p>
-                <a href="" class="btn">see users</a>
-            </div>
+         <div class="box">
+            <h3>60</h3>
+            <p>bookings added</p>
+            <a href="" class="btn">see bookings</a>
+         </div>
 
-            <div class="box">
-                <h3>23</h3>
-                <p>admins registered</p>
-                <a href="" class="btn">see admins</a>
-            </div>
+         <div class="box">
+            <h3>54</h3>
+            <p>feedback recieved</p>
+            <a href="" class="btn">see feedback</a>
+         </div>
 
-        </div>
+         <div class="box">
+            <h3>69</h3>
+            <p>users registered</p>
+            <a href="" class="btn">see users</a>
+         </div>
+
+         <div class="box">
+            <h3>23</h3>
+            <p>admins registered</p>
+            <a href="" class="btn">see admins</a>
+         </div>
+      </div>
+
+   </section>
 
 
-    </section>
 
-    <script src="../js/adminscript.js"></script>
+
+
+
+
+
+
+
+
+
+   <script src="../js/adminscript.js"></script>
 
 </body>
+
 </html>

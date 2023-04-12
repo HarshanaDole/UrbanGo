@@ -1,27 +1,28 @@
+let navbar = document.querySelector('.header .flex .navbar');
+let profile = document.querySelector('.header .flex .profile');
 
-      const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      searchBtn = body.querySelector(".search-box"),
-      modeSwitch = body.querySelector(".toggle-switch"),
-      modeText = body.querySelector(".mode-text");
+document.querySelector('#menu-btn').onclick = () =>{
+   navbar.classList.toggle('active');
+   profile.classList.remove('active');
+}
 
+document.querySelector('#user-btn').onclick = () =>{
+   profile.classList.toggle('active');
+   navbar.classList.remove('active');
+}
 
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
+window.onscroll = () =>{
+   navbar.classList.remove('active');
+   profile.classList.remove('active');
+}
 
-searchBtn.addEventListener("click" , () =>{
-    sidebar.classList.remove("close");
-})
+let mainImage = document.querySelector('.update-product .image-container .main-image img');
+let subImages = document.querySelectorAll('.update-product .image-container .sub-image img');
 
-modeSwitch.addEventListener("click" , () =>{
-    body.classList.toggle("dark");
-    
-    if(body.classList.contains("dark")){
-        modeText.innerText = "Light mode";
-    }else{
-        modeText.innerText = "Dark mode";
-        
-    }
+subImages.forEach(images =>{
+   images.onclick = () =>{
+      src = images.getAttribute('src');
+      mainImage.src = src;
+   }
 });
+
