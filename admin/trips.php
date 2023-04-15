@@ -14,6 +14,7 @@ if (isset($_POST['add_trip'])) {
     $deptime = $_POST['deptime'];
     $arrtime = $_POST['arrtime'];
     $date = $_POST['date'];
+    $no_of_seats = $_POST['no_of_seats'];
 
     $TripRef = $database->getReference('trips');
     $tripSnapshot = $TripRef->getValue();
@@ -36,7 +37,9 @@ if (isset($_POST['add_trip'])) {
             'dropoff' => $dropoff,
             'date' => $date,
             'departure_time' => $deptime,
-            'arrival_time' => $arrtime
+            'arrival_time' => $arrtime,
+            'available_seats' => $no_of_seats,
+            'no_of_seats' => $no_of_seats
         ]);
         $message[] = 'new trip registered successfully!';
     }
@@ -58,6 +61,8 @@ if (isset($_POST['start_session'])) {
     $arrtime = $row['arrival_time'];
     $bus = $row['bus'];
     $date = $row['date'];
+    $no_of_seats = $row['no_of_seats'];
+    $available_seats = $row['available_seats'];
     // set timezone to Sri Lanka
     date_default_timezone_set('Asia/Colombo');
 
@@ -87,6 +92,8 @@ if (isset($_POST['start_session'])) {
             'departure_time(estimated)' => $deptime,
             'arrival_time(estimated)' => $arrtime,
             'departed_at' => $current_time,
+            'available_seats' => $available_seats,
+            'no_of_seats' => $no_of_seats,
             'arrived_at' => '--',
             'trip_status' => 'departed'
         ]);
@@ -155,6 +162,7 @@ if (isset($_POST['start_session'])) {
                         <option value="">-- select bus --</option>
                     </select>
                 </div>
+                <input type="hidden" id="seats" name="no_of_seats">
                 <div class="inputBox">
                     <span>Date</span>
                     <input type="date" name="date" class="box" required>
@@ -192,21 +200,11 @@ if (isset($_POST['start_session'])) {
                         <div class="box">
                             <input type="hidden" name="key" value="<?= $key; ?>">
                             <div class="row">
-                                <span>Pickup :</span>
-                                <div class="reg"><?= $pickup = $row['pickup']; ?></div>
-                            </div>
+                                <div class="reg"><?= $pickup = $row['pickup']; ?> - <?= $dropoff = $row['dropoff']; ?></div>
+                            </div><br>
                             <div class="row">
-                                <span>Dropoff :</span>
-                                <div class="reg"><?= $dropoff = $row['dropoff']; ?></div>
-                            </div>
-                            <div class="row">
-                                <span>Departure :</span>
-                                <div class="reg"><?= $deptime = $row['departure_time']; ?></div>
-                            </div>
-                            <div class="row">
-                                <span>Arrival :</span>
-                                <div class="reg"><?= $arrtime = $row['arrival_time']; ?></div>
-                            </div>
+                                <div class="reg"><?= $deptime = $row['departure_time']; ?> - <?= $arrtime = $row['arrival_time']; ?></div>
+                            </div><br>
                             <div class="row">
                                 <span>Date :</span>
                                 <div class="reg"><?= $date = $row['date']; ?></div>
@@ -215,8 +213,12 @@ if (isset($_POST['start_session'])) {
                                 <span>Bus :</span>
                                 <div class="reg"><?= $bus = $row['bus']; ?></div>
                             </div>
+                            <div class="row">
+                                <span>Seats :</span>
+                                <div class="seats"><?= $available_seats = $row['available_seats']; ?>/<?= $no_of_seats = $row['no_of_seats']; ?></div>
+                            </div>
                             <div class="flex-btn">
-                                <input type="submit" value="start session" class="btn" name="start_session">
+                                <input type="submit" value="start session" class="btn" name="start_session" onclick="return confirm('start session now?');">
                             </div>
                             <div class="flex-btn row">
                                 <a href="update_trip.php?update=<?= $key; ?>" class="option-btn">update</a>
@@ -292,6 +294,20 @@ if (isset($_POST['start_session'])) {
                                 option.value = bus;
                                 option.text = bus;
                                 busSelect.add(option);
+                            });
+
+                            // Add event listener for bus registration number select
+                            busSelect.addEventListener('change', function() {
+                                var selectedBusReg = this.value;
+                                var selectedBusNoOfSeats = 0;
+                                snapshot.forEach(function(busSnapshot) {
+                                    var bus = busSnapshot.val();
+                                    if (bus.registration_plate == selectedBusReg) {
+                                        selectedBusNoOfSeats = bus.no_of_seats;
+                                    }
+                                });
+                                var seatsInput = document.getElementById('seats');
+                                seatsInput.setAttribute('value', selectedBusNoOfSeats);
                             });
                         });
                     }

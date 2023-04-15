@@ -17,6 +17,8 @@ if (isset($_POST['update_status'])) {
     $sessionData = $database->getReference($ref)->getValue();
     $trip_status = $_POST['trip_status'];
     $bus = $sessionData['bus'];
+    $available_seats = $sessionData['available_seats'];
+    $no_of_seats = $sessionData['no_of_seats'];
     $pickup = $sessionData['pickup'];
     $dropoff = $sessionData['dropoff'];
     $deptime = $sessionData['departure_time(estimated)'];
@@ -33,6 +35,8 @@ if (isset($_POST['update_status'])) {
     if ($trip_status == 'completed') {
         $sessionRef->update([
             'bus' => $bus,
+            'available_seats' => $available_seats,
+            'no_of_seats' => $no_of_seats,
             'pickup' => $pickup,
             'dropoff' => $dropoff,
             'date' => $date,
@@ -91,12 +95,11 @@ if (isset($_GET['delete'])) {
             ?>
 
                     <div class="box">
-                        <p> pickup : <span><?= $sessionData['pickup']; ?></span> </p>
-                        <p> dropoff : <span><?= $sessionData['dropoff']; ?></span> </p>
-                        <p> departure time(estimated) : <span><?= $sessionData['arrival_time(estimated)']; ?></span> </p>
-                        <p> arrival time(estimated) : <span><?= $sessionData['departure_time(estimated)']; ?></span> </p>
+                        <p> <span><?= $sessionData['pickup']; ?> - <span><?= $sessionData['dropoff']; ?></span> </p>
+                        <p> <span><?= $sessionData['departure_time(estimated)']; ?> - <?= $sessionData['arrival_time(estimated)']; ?></span> </p>
                         <p> date : <span><?= $sessionData['date']; ?></span> </p>
                         <p> bus : <span><?= $sessionData['bus']; ?></span> </p>
+                        <p> seats : <span><?= $sessionData['available_seats']; ?>/<?= $sessionData['no_of_seats']; ?></span> </p>
                         <p> departed at : <span><?= $sessionData['departed_at']; ?></span> </p>
                         <p> arrived at : <span><?= $sessionData['arrived_at']; ?></span> </p>
                         <form action="" method="post">

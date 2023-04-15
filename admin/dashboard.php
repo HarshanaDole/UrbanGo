@@ -50,7 +50,7 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-         <?php
+            <?php
             $tripsRef = $database->getReference('trips');
             $tripData = $tripsRef->getValue();
             $numtrips = count($tripData);
@@ -61,7 +61,7 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-         <?php
+            <?php
             $sessionsRef = $database->getReference('sessions');
             $sessionData = $sessionsRef->getValue();
             $numsessions = count($sessionData);
@@ -72,7 +72,7 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-         <?php
+            <?php
             $routesRef = $database->getReference('routes');
             $routeData = $routesRef->getValue();
             $numroutes = count($routeData);
@@ -83,9 +83,14 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-            <h3>60</h3>
+            <?php
+            $bookingsRef = $database->getReference('bookings');
+            $bookingData = $bookingsRef->getValue();
+            $numbookings = count($bookingData);
+            ?>
+            <h3><?= $numbookings ?></h3>
             <p>bookings added</p>
-            <a href="" class="btn">see bookings</a>
+            <a href="see_bookings.php" class="btn">see bookings</a>
          </div>
 
          <div class="box">
@@ -101,7 +106,12 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-            <h3>23</h3>
+            <?php
+            $adminsRef = $database->getReference('admins');
+            $adminData = $adminsRef->getValue();
+            $numadmins = count($adminData);
+            ?>
+            <h3><?= $numadmins ?></h3>
             <p>admins registered</p>
             <a href="" class="btn">see admins</a>
          </div>

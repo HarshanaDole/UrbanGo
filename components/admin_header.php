@@ -24,7 +24,7 @@
          <a href="../admin/trips.php">Trips</a>
          <a href="../admin/sessions.php">Sessions</a>
          <a href="../admin/routes.php">Routes</a>
-         <a href="../admin/messages.php">Bookings</a>
+         <a href="../admin/book.php">Book</a>
          <a href="../admin/messages.php">Messages</a>
       </nav>
 

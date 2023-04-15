@@ -579,6 +579,9 @@ section {
    font-size: 2rem;
    color: var(--light-color);
    margin: 1rem 0;
+   display: inline-block;
+   text-align: center;
+   width: 100%;
 }
 
 .sessions .box-container .box p span {
@@ -619,6 +622,7 @@ section {
 
 .show-sessions .box-container .box .row {
    display: flex;
+   flex-direction: column;
    align-items: center;
    gap: 1rem;
 }
@@ -626,18 +630,18 @@ section {
 .show-sessions .box-container .box .row span {
    font-size: 2rem;
    color: var(--light-color);
-   width: 15rem;
-   display: inline-block;
+   display: flex;
+   justify-content: flex-start;
 }
 
 .show-sessions .box-container .box .row div {
    font-size: 2rem;
    color: var(--main-color);
-   width: 20rem;
    display: inline-block;
    overflow: hidden;
    text-overflow: ellipsis;
    white-space: nowrap;
+   text-align: center;
 }
 
 .show-sessions .box-container .box .flex-btn {
@@ -645,11 +649,11 @@ section {
    flex-direction: column;
    align-items: center;
    gap: 1rem;
- }
- 
- .show-sessions .box-container .box .flex-btn.row {
+}
+
+.show-sessions .box-container .box .flex-btn.row {
    flex-direction: row;
- }
+}
 
 .routes .box-container {
    display: grid;
@@ -689,6 +693,99 @@ section {
    border-radius: .5rem;
    border: var(--border);
 }
+
+.find-trips .box-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 33rem);
+   gap: 1.5rem;
+   justify-content: center;
+   align-items: flex-start;
+}
+
+.find-trips .box-container .box {
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+   border: var(--border);
+   padding: 2rem;
+   height: auto;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}
+
+.find-trips .box-container .box .row {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+}
+
+.find-trips .box-container .box .row span {
+   font-size: 2rem;
+   color: var(--light-color);
+   display: flex;
+   justify-content: flex-start;
+}
+
+.find-trips .box-container .box .row div {
+   font-size: 2rem;
+   color: var(--main-color);
+   display: inline-block;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   text-align: center;
+}
+
+.find-trips .box-container .box .flex-btn {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+}
+
+.find-trips .box-container .box .flex-btn.row {
+   flex-direction: row;
+}
+
+.find-trips .box-container .box .row .flex{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap:1rem;
+   margin:1rem 0;
+}
+
+.qty {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .qty input[type=number] {
+   width: 7rem;
+   padding: 1rem;
+   border: var(--border);
+   font-size: 1.8rem;
+   color: var(--black);
+   border-radius: .5rem;
+ }
+ 
+ .qty .arrow {
+   width: 2rem;
+   height: 2rem;
+   margin-left: 1rem;
+   cursor: pointer;
+ }
+ 
+ 
+
+.find-trips .box-container .box .row .flex .price{
+   font-size: 2rem;
+   color:var(--red);
+}
+
 
 .accounts .box-container {
    display: grid;

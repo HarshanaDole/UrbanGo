@@ -6,12 +6,10 @@ session_start();
 
 if(isset($_POST['submit'])){
 
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $username = $_POST['username'];
    $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
-   $adminRef = $database->getReference('admins')->orderByChild('name')->equalTo($name);
+   $adminRef = $database->getReference('admins')->orderByChild('username')->equalTo($username);
    $adminSnapshot = $adminRef->getSnapshot();
    $admin = null;
    foreach ($adminSnapshot->getValue() as $key => $value) {
@@ -64,7 +62,7 @@ if(isset($_POST['submit'])){
    <form action="" method="POST">
       <h3>login now</h3>
       <p>default username = <span>admin</span> & password = <span>123</span></p>
-      <input type="text" name="name" required placeholder="enter your username" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="text" name="username" required placeholder="enter your username" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="pass" required placeholder="enter your password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="login now" class="btn" name="submit">
    </form>
