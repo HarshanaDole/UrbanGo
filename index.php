@@ -11,39 +11,6 @@ if (isset($_SESSION['user_id'])) {
 	exit;
 }
 
-if (isset($_POST['search'])) {
-    $from = $_POST['from'];
-    $to = $_POST['to'];
-    $date = $_POST['date'];
-
-    // Query the database for trips that match the selected pickup, dropoff, and date
-    $tripsRef = $database->getReference('trips');
-    $query = $tripsRef->orderByChild('pickup')->equalTo($from)->getSnapshot()->getValue();
-    $trips = array();
-    foreach ($query as $key => $trip) {
-        if ($trip['dropoff'] == $to && $trip['date'] == $date) {
-            $trips[$key] = $trip;
-        }
-    }
-
-    // Display the matching trips in a table
-    if (count($trips) > 0) {
-        echo '<table>';
-        echo '<tr><th>Driver Name</th><th>Vehicle Number</th><th>Departure Time</th><th>Price</th></tr>';
-        foreach ($trips as $trip) {
-            echo '<tr>';
-            echo '<td>' . $trip['driver'] . '</td>';
-            echo '<td>' . $trip['vehicle'] . '</td>';
-            echo '<td>' . $trip['time'] . '</td>';
-            echo '<td>' . $trip['price'] . '</td>';
-            echo '</tr>';
-        }
-        echo '</table>';
-    } else {
-        echo 'No trips found.';
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +26,7 @@ if (isset($_POST['search'])) {
 <body>
 	<div class="container">
 		<h1>Welcome to UrbanGo</h1>
-		<form>
+		<form action="avbus.php" method="post">
 			<div class="form-group">
 				<label for="from">From</label>
 				<select id="from" name="from" onchange="updateDropOff(this.value)" required>
