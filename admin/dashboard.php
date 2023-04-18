@@ -113,7 +113,7 @@ if (isset($_SESSION['admin_id'])) {
             ?>
             <h3><?= $numadmins ?></h3>
             <p>admins registered</p>
-            <a href="" class="btn">see admins</a>
+            <a href="admin_accounts.php" class="btn">see admins</a>
          </div>
       </div>
 

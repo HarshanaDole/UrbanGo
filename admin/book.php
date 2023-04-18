@@ -59,6 +59,13 @@ if (isset($_POST['add_booking'])) {
             'total_cost' => $total_cost,
             'user_id' => 'N/A',
         ]);
+
+        // update available seats in trips table
+        $tripRef = $database->getReference('trips/' . $trip_key);
+        $tripRef->update([
+            'available_seats' => $available_seats - $booked_seats,
+        ]);
+        
         $message[] = 'booking added successfully!';
     }
 }

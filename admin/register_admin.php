@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
          <h3>register now</h3>
          <input type="text" name="name" required placeholder="enter your name(e.g. Harshana Dole)" maxlength="50" class="box">
          <input type="text" name="username" required placeholder="enter your username(e.g. Haru)" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
-         <input type="text" name="number" required placeholder="enter your mobile number" maxlength="12" class="box">
+         <input type="text" name="number" placeholder="enter your mobile number" class="box" maxlength="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
          <input type="password" name="pass" required placeholder="enter your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
          <input type="password" name="cpass" required placeholder="confirm your password" maxlength="20" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
          <div class="inputBox">

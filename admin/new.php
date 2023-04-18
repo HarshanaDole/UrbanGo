@@ -3,10 +3,10 @@
 include '../components/dbconfig.php';
 
   $route = [
-    'start' => 'Makumbura',
-    'end' => 'Matara',
-    'routeno' => 'EX-001-001',
-    'fare' => '210.00'
+    'start' => 'Elpitiya',
+    'end' => 'Colombo',
+    'routeno' => 'EX 1-16',
+    'fare' => '2600.00'
   ];
 
   $new_route = $database->getReference('routes')->push($route);
