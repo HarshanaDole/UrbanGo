@@ -89,7 +89,7 @@ if (isset($_POST['add_booking'])) {
     <div class="container">
         <h1>Booking Details</h1>
         <img class="pay-image" src="img/payment.png" width="170px" height="  210px">
-        <form action="payment.php" method="post">
+        <form action="components/stripe/public/checkout.php" method="post">
             <div class="bookdet-card">
                 <?php
                 $trip_key = $_POST['trip_key'];
@@ -149,7 +149,7 @@ if (isset($_POST['add_booking'])) {
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="button-next">Next</button>
+                <button type="submit" class="button-next">Checkout</button>
             </div>
         </form>
     </div>

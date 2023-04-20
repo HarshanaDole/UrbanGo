@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $ref = "trips/";
         $fetch_trips = $database->getReference($ref)->getValue();
+        $found_trips = [];
 
         foreach ($fetch_trips as $key => $row) {
             if ($row['pickup'] == $from && $row['dropoff'] == $to && $row['date'] == $date) {
