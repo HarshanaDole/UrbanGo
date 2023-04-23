@@ -5,10 +5,10 @@ include 'components/dbconfig.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'];
 } else {
-	header('location:login.php');
-	exit;
+    header('location:login.php');
+    exit;
 }
 
 ?>
@@ -17,59 +17,63 @@ if (isset($_SESSION['user_id'])) {
 <html>
 
 <head>
-	<title>Bus Ticket Booking</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="css/style.css">
+    <title>Bus Ticket Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-	<div class="container">
-		<h1>Welcome to UrbanGo</h1>
-		<form action="avbus.php" method="post">
-			<div class="form-group">
-				<label for="from">From</label>
-				<select id="from" name="from" onchange="updateDropOff(this.value)" required>
-					<option value="">Select pickup</option>
-					<?php
-					$routesRef = $database->getReference('routes');
-					$routes = $routesRef->getValue();
-					$pickupLocations = array();
-					foreach ($routes as $route) {
-						if (!in_array($route['start'], $pickupLocations)) {
-							echo '<option value="' . $route['start'] . '">' . $route['start'] . '</option>';
-							$pickupLocations[] = $route['start'];
-						}
-						if (!in_array($route['end'], $pickupLocations)) {
-							echo '<option value="' . $route['end'] . '">' . $route['end'] . '</option>';
-							$pickupLocations[] = $route['end'];
-						}
-					}
-					?>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="to">To</label>
-				<select id="to" name="to" onchange="updateDate(document.getElementById('from').value, this.value)" required>
-					<option value="">Select dropoff</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="date">Date</label>
-				<select id="date" name="date" required>
-					<option value="">Select date</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="Search" class="btn" name="search">
-			</div>
-		</form>
-	</div>
+    <div class="container">
+        <h1>Welcome</h1>
+        <div class="logo-container">
+            <img src="img/logo_white.png" alt="Logo" style="width: 100px;">
+        </div>
+        <form action="avbus.php" method="post">
+            <div class="form-group">
+                <label for="from">From</label>
+                <select id="from" name="from" onchange="updateDropOff(this.value)" required>
+                    <option value="">Select pickup</option>
+                    <?php
+                    $routesRef = $database->getReference('routes');
+                    $routes = $routesRef->getValue();
+                    $pickupLocations = array();
+                    foreach ($routes as $route) {
+                        if (!in_array($route['start'], $pickupLocations)) {
+                            echo '<option value="' . $route['start'] . '">' . $route['start'] . '</option>';
+                            $pickupLocations[] = $route['start'];
+                        }
+                        if (!in_array($route['end'], $pickupLocations)) {
+                            echo '<option value="' . $route['end'] . '">' . $route['end'] . '</option>';
+                            $pickupLocations[] = $route['end'];
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <select id="to" name="to" onchange="updateDate(document.getElementById('from').value, this.value)" required>
+                    <option value="">Select dropoff</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <select id="date" name="date" required>
+                    <option value="">Select date</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn" name="search">
+            </div>
+        </form>
+    </div>
 
-	<?php include "components/bottom-nav-bar.php"; ?>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <?php include "components/bottom-nav-bar.php"; ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
     <script src="js/firebase.js"></script>
