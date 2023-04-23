@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $from = $_POST['from'];
     $to = $_POST['to'];
     $date = $_POST['date'];
-
 }
 
 ?>
@@ -42,9 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ref = "trips/";
         $fetch_trips = $database->getReference($ref)->getValue();
         $found_trips = [];
-
         foreach ($fetch_trips as $key => $row) {
-            if ($row['pickup'] == $from && $row['dropoff'] == $to && $row['date'] == $date) {
+            if (is_array($row) && $row['pickup'] == $from && $row['dropoff'] == $to && $row['date'] == $date) {
                 $deptime = $row['departure_time'];
                 // Get current time in Sri Lanka
                 date_default_timezone_set('Asia/Colombo');
@@ -54,6 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
+
+        // Sort trips by departure time in ascending order
+        uasort($found_trips, function ($a, $b) {
+            return strtotime($a['departure_time']) - strtotime($b['departure_time']);
+        });
         ?>
         <?php if (count($found_trips) > 0) : ?>
             <?php foreach ($found_trips as $key => $row) :

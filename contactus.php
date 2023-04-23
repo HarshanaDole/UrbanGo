@@ -10,6 +10,34 @@ if (!isset($user_id)) {
    header('location:login.php');
 }
 
+if(isset($_POST['submit'])) {
+
+    $name = $_POST['name'];
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $email = $_POST['email'];
+    $email = filter_var($email, FILTER_SANITIZE_STRING);
+    $number = $_POST['number'];
+    $number = filter_var($number, FILTER_SANITIZE_STRING);
+    $msg = $_POST['msg'];
+    $msg = filter_var($msg, FILTER_SANITIZE_STRING);
+
+    $data = [
+        'name' => $name,
+        'email' => $email,
+        'phone' => $number,
+        'msg' => $msg
+    ];
+
+    $ref = "messages/";
+    $postdata = $database->getReference($ref)->push($data);
+
+    if($postdata) {
+        header("location: index.php");
+    } else {
+        $message[] = 'failed';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,12 +46,12 @@ if (!isset($user_id)) {
 	<title>Contct Us Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css\contact.css">
 </head>
 <body style="background-color:#434A57;">
 	<div class="container">
 		<h1 style="color:white;">Contact Us</h1>
-        <form>
+        <form method="post">
             <div class="form-group">
                 <div class="boxxx">
                     <label style=" font-size: 20px;" >Contact Info</label>
@@ -33,22 +61,20 @@ if (!isset($user_id)) {
 			</div>
             <div class="form-group">
                 <label style=" font-size: 20px; color:white;">Write Us</label>
-				<input type = "text" class="contactfield" name="uname" placeholder="User name">
+				<input type = "text" class="contactfield" name="name" placeholder="User name">
 			</div>
 			<div class="form-group">
-				<input type = "text" class="contactfield" name="uname" placeholder="User name">
-			</div>
-			<div class="form-group">
-                <input type = "email" class="contactfield" name="mail" placeholder="Email address">
+                <input type = "email" class="contactfield" name="email" placeholder="Email address">
             </div>
             <div class="form-group">
-                <input type = "text" class="contactfield" name="cno" placeholder="Phone Number">
+                <input type = "text" class="contactfield" name="number" placeholder="Phone Number">
             </div>
             <div class="form-group">
-                <textarea style="resize: none;" class="contactfield" name="cno" placeholder="Message" rows="6" cols="50" ></textarea>
+                <textarea style="resize: none;" class="contactfield" name="msg" placeholder="Message" rows="6" cols="50" ></textarea>
             </div>
-            <div class="form-group">
-                <input type = "submit" class="field" name="submit" value="Send" style="background-color:teal; color:white; max-width: 120px;">
+            <div class="button-container">
+			    <a href=""></a>
+                <input type = "submit" class="field" name="submit" value="Submit">
             </div>
 		</form>
 	</div>

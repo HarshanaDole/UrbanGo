@@ -15,12 +15,12 @@ body {
     justify-content: center;
     min-height: 100vh;
     overflow-y: auto;
-    padding-bottom: 60px; /* add padding to prevent content from being covered by the icons */
+    padding-bottom: 90px; /* add padding to prevent content from being covered by the icons */
 }
 h1 {
     color: white;
     font-size: 28px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     text-align: center;
 }
 

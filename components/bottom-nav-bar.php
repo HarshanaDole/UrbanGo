@@ -12,10 +12,6 @@ $fetch_profile = $userSnapshot->getValue();
 		<i class="fa fa-history"></i>
 		<span>History</span>
 	</div>
-	<div class="icon">
-		<i class="fa fa-bell"></i>
-		<span>Notifications</span>
-	</div>
 	<div class="icon" onclick="window.location.href = 'profile.php';">
 		<i class="fa fa-user"></i>
 		<span>Profile</span>
