@@ -42,7 +42,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $busesRef = $database->getReference('buses');
             $busesData = $busesRef->getValue();
-            $numBuses = count($busesData);
+            $numBuses = 0;
+            if (isset($busesData)) {
+               $numBuses = count($busesData);
+            }
             ?>
             <h3><?= $numBuses ?></h3>
             <p>buses added</p>
@@ -53,7 +56,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $tripsRef = $database->getReference('trips');
             $tripData = $tripsRef->getValue();
-            $numtrips = count($tripData);
+            $numtrips = 0;
+            if (isset($tripData)) {
+               $numtrips = count($tripData);
+            }
             ?>
             <h3><?= $numtrips ?></h3>
             <p>trips assigned</p>
@@ -64,7 +70,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $sessionsRef = $database->getReference('sessions');
             $sessionData = $sessionsRef->getValue();
-            $numsessions = count($sessionData);
+            $numsessions = 0;
+            if (isset($sessionData)) {
+               $numsessions = count($sessionData);
+            }
             ?>
             <h3><?= $numsessions ?></h3>
             <p>ongoing sessions</p>
@@ -75,7 +84,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $routesRef = $database->getReference('routes');
             $routeData = $routesRef->getValue();
-            $numroutes = count($routeData);
+            $numroutes = 0;
+            if (isset($routeData)) {
+               $numroutes = count($routeData);
+            }
             ?>
             <h3><?= $numroutes ?></h3>
             <p>routes & fares</p>
@@ -86,7 +98,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $bookingsRef = $database->getReference('bookings');
             $bookingData = $bookingsRef->getValue();
-            $numbookings = count($bookingData);
+            $numbookings = 0;
+            if (isset($bookingData)) {
+               $numbookings = count($bookingData);
+            }
             ?>
             <h3><?= $numbookings ?></h3>
             <p>bookings added</p>
@@ -94,13 +109,29 @@ if (isset($_SESSION['admin_id'])) {
          </div>
 
          <div class="box">
-            <h3>54</h3>
+            <?php
+            $messagesRef = $database->getReference('messages');
+            $messageData = $messagesRef->getValue();
+            $nummessages = 0;
+            if (isset($messageData)) {
+               $nummessages = count($messageData);
+            }
+            ?>
+            <h3><?= $nummessages ?></h3>
             <p>feedback recieved</p>
-            <a href="" class="btn">see feedback</a>
+            <a href="messages.php" class="btn">see feedback</a>
          </div>
 
          <div class="box">
-            <h3>69</h3>
+            <?php
+            $usersRef = $database->getReference('users');
+            $userData = $usersRef->getValue();
+            $numusers = 0;
+            if (isset($userData)) {
+               $numusers = count($userData);
+            }
+            ?>
+            <h3><?= $numusers ?></h3>
             <p>users registered</p>
             <a href="" class="btn">see users</a>
          </div>
@@ -109,7 +140,10 @@ if (isset($_SESSION['admin_id'])) {
             <?php
             $adminsRef = $database->getReference('admins');
             $adminData = $adminsRef->getValue();
-            $numadmins = count($adminData);
+            $numadmins = 0;
+            if (isset($adminData)) {
+               $numadmins = count($adminData);
+            }
             ?>
             <h3><?= $numadmins ?></h3>
             <p>admins registered</p>
@@ -118,17 +152,6 @@ if (isset($_SESSION['admin_id'])) {
       </div>
 
    </section>
-
-
-
-
-
-
-
-
-
-
-
 
    <script src="../js/adminscript.js"></script>
 

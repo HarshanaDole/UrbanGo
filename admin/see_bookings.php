@@ -39,8 +39,8 @@ if (isset($_POST['add_booking'])) {
     $bookingSnapshot = $BookingRef->getValue();
 
     $seatsExceeded = false;
-    foreach ($bookingSnapshot as $key => $booking) {
-        if ($booking['booked_seats'] > $available_seats) {
+    foreach ($bookingSnapshot as $key => $row) {
+        if ($row['booked_seats'] > $available_seats) {
             $seatsExceeded = true;
             break;
         }
@@ -113,9 +113,8 @@ if (isset($_GET['delete'])) {
 
             if (!empty($found_bookings)) {
                 foreach ($found_bookings as $key => $row) {
-
+                    if (empty($row['bus']) || empty($row['date']) || empty($row['departure_time']) || empty($row['arrival_time']) || empty($row['total_cost'])) continue;
             ?>
-
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="box">
                             <input type="hidden" name="trip_key" value="<?= $key; ?>">
